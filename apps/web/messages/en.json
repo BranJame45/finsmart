@@ -7,7 +7,8 @@
     "banks": "Banks",
     "investment": "Investments",
     "goals": "Goals",
-    "chat": "AI Assistant"
+    "chat": "AI Assistant",
+    "categories": "Categories"
   },
   "auth": {
     "login": "Sign In",
@@ -30,7 +31,14 @@
     "monthlyOverview": "Monthly Overview",
     "budgetUsage": "Budget Usage",
     "goalProgress": "Active Goal Progress",
-    "noData": "No data available"
+    "noData": "No data available",
+    "budgetUsed": "Budget used",
+    "viewAll": "View all",
+    "noTransactions": "No recent transactions",
+    "noBudgets": "No budgets set",
+    "noGoal": "No active goal",
+    "of": "of",
+    "thisMonth": "This month"
   },
   "income": {
     "title": "Income",
@@ -60,6 +68,7 @@
   "categories": {
     "title": "Categories",
     "add": "Add Category",
+    "edit": "Edit Category",
     "name": "Name",
     "color": "Color",
     "budget": "Budget",
@@ -90,7 +99,14 @@
     "minAmount": "Minimum Amount",
     "active": "Active",
     "empty": "No banks configured",
-    "scrapeRates": "Update Rates Automatically"
+    "scrapeRates": "Update Rates Automatically",
+    "suggested": "Suggested Peruvian banks",
+    "min": "Min.",
+    "inactive": "Inactive",
+    "saving": "Saving...",
+    "scraping": "Querying SBS...",
+    "deleteConfirm": "Delete this bank?",
+    "noRate": "—"
   },
   "investment": {
     "title": "Investments",
@@ -108,7 +124,29 @@
     "endDate": "End Date",
     "empty": "No investments recorded",
     "compareInput": "Amount and Term",
-    "bestBank": "Best Bank"
+    "bestBank": "Best Bank",
+    "calculator": "Calculator",
+    "comparator": "Bank comparator",
+    "goalSimulator": "Goal simulator",
+    "amount": "Amount to invest",
+    "calculate": "Calculate",
+    "gain": "Gross gain",
+    "effectiveRate": "Effective rate",
+    "results": "Results",
+    "reachable": "Goal reachable!",
+    "notReachable": "Goal not reachable with that contribution",
+    "monthsToGoal": "Months to reach it",
+    "suggestedContribution": "Monthly contribution needed",
+    "initialCapital": "Initial capital",
+    "months": "months",
+    "selectBank": "Select a bank",
+    "projection": "Month-by-month projection",
+    "month": "Month",
+    "saveInvestment": "Save investment",
+    "activeInvestments": "Active investments",
+    "noActive": "No active investments",
+    "bestBankLabel": "Best option",
+    "noBanksForTerm": "No active banks for that term"
   },
   "goals": {
     "title": "Goals",
@@ -122,14 +160,29 @@
     "active": "Active",
     "completed": "Completed",
     "cancelled": "Cancelled",
-    "empty": "No goals recorded"
+    "empty": "No goals recorded",
+    "progress": "Progress",
+    "remaining": "Remaining",
+    "monthlyNeeded": "Monthly saving needed",
+    "monthsLeft": "months left",
+    "linkedBank": "Linked bank",
+    "updateAmount": "Update savings",
+    "deadlineOptional": "Deadline (optional)",
+    "noBank": "No bank",
+    "deleteConfirm": "Delete this goal?",
+    "saving": "Saving..."
   },
   "chat": {
     "title": "AI Financial Assistant",
     "placeholder": "Type your message here...",
     "send": "Send",
     "loading": "Thinking...",
-    "error": "Error processing message"
+    "error": "Error processing message",
+    "greeting": "Hi! I am your financial assistant",
+    "intro": "Ask me about your finances, spending, goals or investments.",
+    "suggestion1": "Can I treat myself this month?",
+    "suggestion2": "What do I spend most on?",
+    "suggestion3": "Which bank is best to invest?"
   },
   "common": {
     "save": "Save",
@@ -151,6 +204,15 @@
     "weekly": "Weekly",
     "biweekly": "Biweekly",
     "monthly": "Monthly",
-    "yearly": "Yearly"
+    "yearly": "Yearly",
+    "add": "Add",
+    "saving": "Saving...",
+    "none": "None",
+    "optional": "optional",
+    "all": "All"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications"
   }
 }

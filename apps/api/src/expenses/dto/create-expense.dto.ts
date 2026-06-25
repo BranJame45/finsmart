@@ -1,4 +1,4 @@
-import { IsNumber, IsString, IsOptional, IsBoolean, IsDateString, IsEnum } from 'class-validator';
+import { IsNumber, IsString, IsOptional, IsBoolean, IsDateString, IsEnum, IsUUID } from 'class-validator';
 import { Currency, RecurringFrequency } from '@prisma/client';
 
 export class CreateExpenseDto {
@@ -12,7 +12,7 @@ export class CreateExpenseDto {
   @IsString()
   description: string;
 
-  @IsString()
+  @IsUUID()
   categoryId: string;
 
   @IsDateString()

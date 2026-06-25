@@ -26,7 +26,7 @@ export default function ExpensesDonut({ data }: ExpensesDonutProps) {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border-soft)', color: 'var(--text-main)', borderRadius: '0.75rem', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} itemStyle={{ color: 'var(--text-main)' }} />
       </PieChart>
     </ResponsiveContainer>
   );

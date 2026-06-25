@@ -20,7 +20,7 @@ export default function MonthlySavings({ data }: MonthlySavingsProps) {
       <AreaChart data={data}>
         <XAxis dataKey="month" />
         <YAxis />
-        <Tooltip />
+        <Tooltip contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border-soft)', color: 'var(--text-main)', borderRadius: '0.75rem', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} itemStyle={{ color: 'var(--text-main)' }} />
         <Area
           type="monotone"
           dataKey="savings"

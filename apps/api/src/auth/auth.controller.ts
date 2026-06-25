@@ -20,9 +20,8 @@ export class AuthController {
 
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(AuthGuard('jwt'))
-  async refresh(@Req() req: any) {
-    return this.authService.refresh(req.user.id);
+  async refresh(@Body() body: { refreshToken: string }) {
+    return this.authService.refresh(body?.refreshToken);
   }
 
   @Post('change-password')

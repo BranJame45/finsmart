@@ -18,6 +18,12 @@ export class IncomeController {
     return this.incomeService.findAll(req.user.id);
   }
 
+  // Debe ir antes de ':id' para no ser capturada por el parámetro.
+  @Get('salary-history')
+  salaryHistory(@Req() req: any) {
+    return this.incomeService.salaryHistory(req.user.id);
+  }
+
   @Get(':id')
   findOne(@Req() req: any, @Param('id') id: string) {
     return this.incomeService.findOne(req.user.id, id);

@@ -63,9 +63,11 @@ export class InvestmentService {
     };
   }
 
-  async goalProjection(dto: { targetAmount: number; initialCapital: number; monthlyContribution: number; termMonths: number }) {
+  async goalProjection(dto: { targetAmount: number; initialCapital: number; monthlyContribution: number; termMonths: number; annualRate?: number }) {
     const { targetAmount, initialCapital, monthlyContribution, termMonths } = dto;
-    const monthlyRate = 0.05 / 12;
+    // Tasa mensual a partir de la TREA recibida (fórmula del requerimiento: TREA/12/100).
+    const annualRate = dto.annualRate ?? 4; // fallback realista si el front no envía banco
+    const monthlyRate = annualRate / 12 / 100;
     const monthlyData = [];
 
     let current = initialCapital;

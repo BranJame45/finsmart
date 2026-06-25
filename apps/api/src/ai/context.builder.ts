@@ -10,28 +10,33 @@ export class ContextBuilder {
     const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
     const currentMonthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-    const [incomes, expenses, goals, banks, lastMessages] = await Promise.all([
-      this.prisma.income.findMany({
-        where: {
-          userId,
-          date: { gte: currentMonthStart, lte: currentMonthEnd },
-        },
-      }),
-      this.prisma.expense.findMany({
-        where: {
-          userId,
-          date: { gte: currentMonthStart, lte: currentMonthEnd },
-        },
-        include: { category: true },
-      }),
-      this.prisma.goal.findMany({ where: { userId, status: 'ACTIVE' } }),
-      this.prisma.bank.findMany({ where: { userId, active: true } }),
-      this.prisma.chatMessage.findMany({
-        where: { userId },
-        orderBy: { createdAt: 'desc' },
-        take: 5,
-      }),
-    ]);
+    const [salary, incomes, expenses, goals, banks, investments] =
+      await Promise.all([
+        // Sueldo vigente: último ingreso tipo SALARY
+        this.prisma.income.findFirst({
+          where: { userId, type: 'SALARY' },
+          orderBy: { date: 'desc' },
+        }),
+        this.prisma.income.findMany({
+          where: {
+            userId,
+            date: { gte: currentMonthStart, lte: currentMonthEnd },
+          },
+        }),
+        this.prisma.expense.findMany({
+          where: {
+            userId,
+            date: { gte: currentMonthStart, lte: currentMonthEnd },
+          },
+          include: { category: true },
+        }),
+        this.prisma.goal.findMany({ where: { userId, status: 'ACTIVE' } }),
+        this.prisma.bank.findMany({ where: { userId, active: true } }),
+        this.prisma.investment.findMany({
+          where: { userId },
+          include: { bank: true },
+        }),
+      ]);
 
     const totalIncome = incomes.reduce((s, i) => s + i.amount, 0);
     const totalExpenses = expenses.reduce((s, e) => s + e.amount, 0);
@@ -46,15 +51,17 @@ export class ContextBuilder {
       ),
     )
       .sort(([, a], [, b]) => b - a)
-      .slice(0, 5);
+      .slice(0, 3);
 
     return `
+- Sueldo vigente: ${salary ? `${salary.currency === 'USD' ? '$' : 'S/'} ${salary.amount.toFixed(2)}/mes` : 'No registrado'}
 - Balance del mes: S/ ${(totalIncome - totalExpenses).toFixed(2)}
 - Ingresos del mes: S/ ${totalIncome.toFixed(2)}
 - Gastos del mes: S/ ${totalExpenses.toFixed(2)}
-- Top categorías de gasto: ${topCategories.map(([c, a]) => `${c} (S/ ${a.toFixed(2)})`).join(', ')}
-- Metas activas: ${goals.map((g) => `${g.name} (${g.currentAmount}/${g.targetAmount})`).join(', ') || 'Ninguna'}
-- Bancos configurados: ${banks.map((b) => b.name).join(', ') || 'Ninguno'}
+- Top 3 categorías de gasto: ${topCategories.map(([c, a]) => `${c} (S/ ${a.toFixed(2)})`).join(', ') || 'Sin gastos'}
+- Metas activas: ${goals.map((g) => `${g.name} (${g.currentAmount}/${g.targetAmount} ${g.currency})`).join(', ') || 'Ninguna'}
+- Inversiones activas: ${investments.map((i) => `${i.bank.name} ${i.currency === 'USD' ? '$' : 'S/'}${i.amount.toFixed(0)} a ${i.termDays}d (gana ${i.currency === 'USD' ? '$' : 'S/'}${i.projectedGain.toFixed(2)})`).join(', ') || 'Ninguna'}
+- Bancos configurados: ${banks.map((b) => `${b.name} (TREA ${b.treaPEN ?? '-'}% / APY ${b.apyUSD ?? '-'}%)`).join(', ') || 'Ninguno'}
 `.trim();
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, Headers, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AiService } from './ai.service';
 
@@ -13,8 +13,14 @@ export class AiController {
   }
 
   @Post('chat')
-  async chat(@Req() req: any, @Body() body: { message: string; lang?: string }) {
-    return this.aiService.chat(req.user.id, body.message, body.lang || 'es');
+  async chat(
+    @Req() req: any,
+    @Body() body: { message: string; lang?: string },
+    @Headers('accept-language') acceptLang?: string,
+  ) {
+    // Prioridad: lang del body > Accept-Language header > 'es'
+    const lang = body.lang || (acceptLang?.toLowerCase().startsWith('en') ? 'en' : 'es');
+    return this.aiService.chat(req.user.id, body.message, lang);
   }
 
   @Get('weekly-recommendation')

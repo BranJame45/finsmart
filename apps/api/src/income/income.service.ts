@@ -7,8 +7,27 @@ export class IncomeService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(userId: string, dto: CreateIncomeDto) {
-    return this.prisma.income.create({
+    const income = await this.prisma.income.create({
       data: { ...dto, userId },
+    });
+    // Si es sueldo, deja registro en el historial de cambios de sueldo.
+    if (dto.type === 'SALARY') {
+      await this.prisma.salaryHistory.create({
+        data: {
+          userId,
+          amount: dto.amount,
+          currency: dto.currency ?? 'PEN',
+          startDate: new Date(dto.date),
+        },
+      });
+    }
+    return income;
+  }
+
+  async salaryHistory(userId: string) {
+    return this.prisma.salaryHistory.findMany({
+      where: { userId },
+      orderBy: { startDate: 'desc' },
     });
   }
 
@@ -28,11 +47,23 @@ export class IncomeService {
   }
 
   async update(userId: string, id: string, dto: CreateIncomeDto) {
-    await this.findOne(userId, id);
-    return this.prisma.income.update({
+    const existing = await this.findOne(userId, id);
+    const updated = await this.prisma.income.update({
       where: { id },
       data: dto,
     });
+    // Cambio de sueldo -> nuevo registro en el historial.
+    if (updated.type === 'SALARY' && existing.amount !== updated.amount) {
+      await this.prisma.salaryHistory.create({
+        data: {
+          userId,
+          amount: updated.amount,
+          currency: updated.currency,
+          startDate: new Date(updated.date),
+        },
+      });
+    }
+    return updated;
   }
 
   async remove(userId: string, id: string) {

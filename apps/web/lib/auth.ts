@@ -2,35 +2,27 @@ import { api } from './api';
 
 interface AuthResponse {
   token: string;
-  user: {
-    id: string;
-    email: string;
-    name: string;
-  };
+  refreshToken?: string;
+  user: { id: string; email: string; name: string };
 }
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
   const data = await api.post<AuthResponse>('/auth/login', { email, password });
   localStorage.setItem('finsmart_token', data.token);
+  if (data.refreshToken) localStorage.setItem('finsmart_refresh', data.refreshToken);
   return data;
 }
 
-export async function register(
-  email: string,
-  password: string,
-  name: string,
-): Promise<AuthResponse> {
-  const data = await api.post<AuthResponse>('/auth/register', {
-    email,
-    password,
-    name,
-  });
+export async function register(email: string, password: string, name: string): Promise<AuthResponse> {
+  const data = await api.post<AuthResponse>('/auth/register', { email, password, name });
   localStorage.setItem('finsmart_token', data.token);
+  if (data.refreshToken) localStorage.setItem('finsmart_refresh', data.refreshToken);
   return data;
 }
 
 export function logout(): void {
   localStorage.removeItem('finsmart_token');
+  localStorage.removeItem('finsmart_refresh');
   window.location.href = '/login';
 }
 

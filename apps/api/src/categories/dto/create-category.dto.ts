@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsNumber, IsEnum } from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsEnum, IsHexColor } from 'class-validator';
 import { Currency } from '@prisma/client';
 
 export class CreateCategoryDto {
@@ -6,7 +6,7 @@ export class CreateCategoryDto {
   name: string;
 
   @IsOptional()
-  @IsString()
+  @IsHexColor()
   color?: string;
 
   @IsOptional()

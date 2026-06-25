@@ -7,7 +7,8 @@
     "banks": "Bancos",
     "investment": "Inversiones",
     "goals": "Metas",
-    "chat": "Asistente IA"
+    "chat": "Asistente IA",
+    "categories": "Categorías"
   },
   "auth": {
     "login": "Iniciar Sesión",
@@ -30,7 +31,14 @@
     "monthlyOverview": "Resumen Mensual",
     "budgetUsage": "Uso de Presupuesto",
     "goalProgress": "Progreso de Meta Activa",
-    "noData": "Sin datos disponibles"
+    "noData": "Sin datos disponibles",
+    "budgetUsed": "Presupuesto usado",
+    "viewAll": "Ver todo",
+    "noTransactions": "Sin transacciones recientes",
+    "noBudgets": "Sin presupuestos definidos",
+    "noGoal": "Sin meta activa",
+    "of": "de",
+    "thisMonth": "Este mes"
   },
   "income": {
     "title": "Ingresos",
@@ -60,6 +68,7 @@
   "categories": {
     "title": "Categorías",
     "add": "Agregar Categoría",
+    "edit": "Editar Categoría",
     "name": "Nombre",
     "color": "Color",
     "budget": "Presupuesto",
@@ -90,7 +99,14 @@
     "minAmount": "Monto Mínimo",
     "active": "Activo",
     "empty": "No hay bancos configurados",
-    "scrapeRates": "Actualizar Tasas Automáticamente"
+    "scrapeRates": "Actualizar Tasas Automáticamente",
+    "suggested": "Bancos peruanos sugeridos",
+    "min": "Mín.",
+    "inactive": "Inactivo",
+    "saving": "Guardando...",
+    "scraping": "Consultando SBS...",
+    "deleteConfirm": "¿Eliminar este banco?",
+    "noRate": "—"
   },
   "investment": {
     "title": "Inversiones",
@@ -108,7 +124,29 @@
     "endDate": "Fecha de Fin",
     "empty": "No hay inversiones registradas",
     "compareInput": "Monto y Plazo",
-    "bestBank": "Mejor Banco"
+    "bestBank": "Mejor Banco",
+    "calculator": "Calculadora",
+    "comparator": "Comparador de bancos",
+    "goalSimulator": "Simulador de meta",
+    "amount": "Monto a invertir",
+    "calculate": "Calcular",
+    "gain": "Ganancia bruta",
+    "effectiveRate": "Tasa efectiva",
+    "results": "Resultados",
+    "reachable": "¡Meta alcanzable!",
+    "notReachable": "Meta no alcanzable con ese aporte",
+    "monthsToGoal": "Meses para lograrla",
+    "suggestedContribution": "Aporte mensual necesario",
+    "initialCapital": "Capital inicial",
+    "months": "meses",
+    "selectBank": "Selecciona un banco",
+    "projection": "Proyección mes a mes",
+    "month": "Mes",
+    "saveInvestment": "Registrar inversión",
+    "activeInvestments": "Inversiones activas",
+    "noActive": "No tienes inversiones activas",
+    "bestBankLabel": "Mejor opción",
+    "noBanksForTerm": "No hay bancos activos con ese plazo"
   },
   "goals": {
     "title": "Metas",
@@ -122,14 +160,29 @@
     "active": "Activa",
     "completed": "Completada",
     "cancelled": "Cancelada",
-    "empty": "No hay metas registradas"
+    "empty": "No hay metas registradas",
+    "progress": "Progreso",
+    "remaining": "Falta",
+    "monthlyNeeded": "Ahorro mensual necesario",
+    "monthsLeft": "meses restantes",
+    "linkedBank": "Banco vinculado",
+    "updateAmount": "Actualizar ahorro",
+    "deadlineOptional": "Fecha límite (opcional)",
+    "noBank": "Sin banco",
+    "deleteConfirm": "¿Eliminar esta meta?",
+    "saving": "Guardando..."
   },
   "chat": {
     "title": "Asistente Financiero IA",
     "placeholder": "Escribe tu mensaje aquí...",
     "send": "Enviar",
     "loading": "Pensando...",
-    "error": "Error al procesar el mensaje"
+    "error": "Error al procesar el mensaje",
+    "greeting": "¡Hola! Soy tu asistente financiero",
+    "intro": "Pregúntame sobre tus finanzas, gastos, metas o inversiones.",
+    "suggestion1": "¿Puedo darme un gusto este mes?",
+    "suggestion2": "¿En qué gasto más?",
+    "suggestion3": "¿Qué banco me conviene para invertir?"
   },
   "common": {
     "save": "Guardar",
@@ -151,6 +204,15 @@
     "weekly": "Semanal",
     "biweekly": "Quincenal",
     "monthly": "Mensual",
-    "yearly": "Anual"
+    "yearly": "Anual",
+    "add": "Añadir",
+    "saving": "Guardando...",
+    "none": "Ninguno",
+    "optional": "opcional",
+    "all": "Todos"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "empty": "No tienes notificaciones"
   }
 }
