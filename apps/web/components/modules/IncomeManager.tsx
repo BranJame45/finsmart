@@ -201,7 +201,7 @@ export default function IncomeManager() {
               <tbody className="divide-y divide-gray-100">
                 {incomes.map((inc) => (
                   <tr key={inc.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 text-gray-500">{new Date(inc.date).toLocaleDateString()}</td>
+                    <td className="px-6 py-4 text-gray-500">{new Date(inc.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</td>
                     <td className="px-6 py-4 font-medium text-gray-800">{inc.description || '-'}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${

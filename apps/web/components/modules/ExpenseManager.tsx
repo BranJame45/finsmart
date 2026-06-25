@@ -198,7 +198,7 @@ export default function ExpenseManager() {
               <tbody className="divide-y divide-gray-100">
                 {expenses.map((exp) => (
                   <tr key={exp.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 text-gray-500">{new Date(exp.date).toLocaleDateString()}</td>
+                    <td className="px-6 py-4 text-gray-500">{new Date(exp.date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</td>
                     <td className="px-6 py-4 font-medium text-gray-800">{exp.description}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
