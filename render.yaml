@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: finsmart-api
+    env: node
+    region: ohio
+    buildCommand: npm install && npm --prefix apps/api run build
+    startCommand: npm --prefix apps/api run start:prod
+    envVars:
+      - key: DATABASE_URL
+        sync: false # Debes colocar la URL de Supabase manualmente en el dashboard de Render
+      - key: JWT_SECRET
+        generateValue: true # Render generará un secreto seguro automáticamente
+      - key: NODE_ENV
+        value: production
