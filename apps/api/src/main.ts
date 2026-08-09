@@ -5,6 +5,9 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Health check para UptimeRobot (sin auth, sin prefix)
+  app.getHttpAdapter().get('/api/health', (_req, res) => res.status(200).json({ status: 'ok' }));
+
   app.setGlobalPrefix('api');
   app.enableCors({
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
