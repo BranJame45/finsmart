@@ -36,7 +36,14 @@ async function bootstrap(): Promise<Handler> {
   );
 
   await app.init();
-  return serverlessExpress({ app: expressApp });
+  // binarySettings: sin esto, API Gateway devuelve el PDF como texto UTF-8 y lo
+  // corrompe (reporte vacío). Marca estos tipos como binarios (base64).
+  return serverlessExpress({
+    app: expressApp,
+    binarySettings: {
+      contentTypes: ['application/pdf', 'application/octet-stream', 'image/*'],
+    },
+  });
 }
 
 export const handler: Handler = async (event, context, callback) => {
