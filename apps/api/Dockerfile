@@ -1,24 +1,17 @@
-FROM node:18-alpine AS builder
+# Imagen de contenedor para AWS Lambda (Node.js 20 sobre Amazon Linux 2023).
+# Compilar en esta base garantiza que los módulos nativos (bcrypt) y el
+# motor de Prisma se generen para el runtime real de Lambda.
+FROM public.ecr.aws/lambda/nodejs:20
 
-WORKDIR /app
+WORKDIR ${LAMBDA_TASK_ROOT}
 
-COPY package.json tsconfig.json ./
-RUN npm ci
+# Instala dependencias (incluye compilación nativa de bcrypt).
+COPY package*.json ./
+RUN npm install
 
-COPY prisma ./prisma
-RUN npx prisma generate
+# Copia el código y genera cliente Prisma + build de NestJS.
+COPY . .
+RUN npx prisma generate && npm run build
 
-COPY src ./src
-RUN npm run build
-
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY package.json ./
-
-EXPOSE 3001
-
-CMD ["node", "dist/main"]
+# Handler: dist/lambda.handler
+CMD ["dist/lambda.handler"]

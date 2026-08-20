@@ -19,5 +19,5 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "dist", "prisma", "test"]
+  "exclude": ["node_modules", "dist", "prisma", "test", "create-demo-user.ts", "seed-demo.ts"]
 }

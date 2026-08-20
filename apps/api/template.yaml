@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  FinSmart API (NestJS + Prisma) serverless en AWS Lambda (imagen de contenedor)
+  + API Gateway, usando Neon (PostgreSQL) como base de datos.
+
+Parameters:
+  DatabaseUrl:
+    Type: String
+    NoEcho: true
+    Description: Connection string de Neon (Pooled)
+  JwtSecret:
+    Type: String
+    NoEcho: true
+  GroqApiKey:
+    Type: String
+    NoEcho: true
+    Default: ""
+  FrontendUrl:
+    Type: String
+    Default: "*"
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 1024
+
+Resources:
+  FinsmartApiFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      DockerContext: .
+      Dockerfile: Dockerfile
+      DockerTag: finsmart-api
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          DATABASE_URL: !Ref DatabaseUrl
+          JWT_SECRET: !Ref JwtSecret
+          GROQ_API_KEY: !Ref GroqApiKey
+          FRONTEND_URL: !Ref FrontendUrl
+      Events:
+        Root:
+          Type: Api
+          Properties: { Path: "/", Method: any }
+        Proxy:
+          Type: Api
+          Properties: { Path: "/{proxy+}", Method: any }
+
+Outputs:
+  ApiUrl:
+    Description: URL base del API
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
