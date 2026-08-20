@@ -11,3 +11,5 @@ apps/web/node_modules/
 apps/web/.next/
 apps/web/.env
 .aws-sam/
+samconfig.toml
+apps/api/samconfig.toml
