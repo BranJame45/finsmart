@@ -118,8 +118,8 @@ export default function LoginPage() {
           <div className="mt-6 p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-center">
             <p className="text-xs text-indigo-300 font-medium mb-1">Demo Access / Acceso de Prueba</p>
             <p className="text-sm text-indigo-100">
-              <strong>Email:</strong> demo@finsmart.com<br />
-              <strong>Password:</strong> demo123
+              <strong>Email:</strong> brandon@finsmart.app<br />
+              <strong>Password:</strong> FinSmart2026!
             </p>
           </div>
         </div>
